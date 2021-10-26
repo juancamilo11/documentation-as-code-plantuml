@@ -1,0 +1,38 @@
+@startuml
+/'
+Elaborado por: Juan Camilo Cardona Calderón
+Curso: Buenas prácticas para el desarrollo de software
+'/
+title "Sequence Diagram"
+participant user
+
+participant c as "Controller"
+participant s as "Service"
+participant r as "Repository"
+participant d as "Database"
+
+user -> c: <<Request>>
+activate c
+
+c -> s: <<doWork>>
+activate s
+
+s -> r: <<DoWork>>
+activate r
+
+r -> d: <<Query / Command>>
+activate d
+
+d --> r: <<Response>>
+deactivate d
+
+r --> s: Done
+deactivate r
+
+s --> c: Done
+deactivate s
+
+c --> user: <<Response>>
+deactivate c
+
+@enduml

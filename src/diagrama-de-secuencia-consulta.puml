@@ -1,0 +1,39 @@
+@startuml
+/'
+Elaborado por: Juan Camilo Cardona Calderón
+Curso: Buenas prácticas para el desarrollo de software
+'/
+title "Sequence Diagram - Reading a question"
+
+participant user
+
+participant c as "Controller"
+participant s as "Service"
+participant r as "Repository/uses Mapper"
+participant d as "Database"
+
+user -> c: <<POST/JSON:QuestionId>>
+activate c
+
+c -> s: getQuestion(QuestionId)
+activate s
+
+s -> r: getQuestion(QuestionId)
+activate r
+
+r -> d: findById(QuestionId)
+activate d
+
+d --> r: <<Question>>
+deactivate d
+
+r --> s: <<QuestionDTO>>
+deactivate r
+
+s --> c: <<QuestionDTO>>
+deactivate s
+
+c --> user: <<JSON:QuestionDTO>>
+deactivate c
+
+@enduml

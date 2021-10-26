@@ -1,0 +1,39 @@
+@startuml
+/'
+Elaborado por: Juan Camilo Cardona Calderón
+Curso: Buenas prácticas para el desarrollo de software
+'/
+title "Sequence Diagram - Creating a question"
+
+participant user
+
+participant c as "Controller"
+participant s as "Service"
+participant r as "Repository/uses Mapper"
+participant d as "Database"
+
+user -> c: <<POST/JSON:QuestionDTO>>
+activate c
+
+c -> s: createQuestion(QuestionDTO)
+activate s
+
+s -> r: createQuestion(QuestionDTO)
+activate r
+
+r -> d: save(Question)
+activate d
+
+d --> r: <<Question>>
+deactivate d
+
+r --> s: <<QuestionDTO>>
+deactivate r
+
+s --> c: <<QuestionDTO>>
+deactivate s
+
+c --> user: <<JSON:QuestionDTO>>
+deactivate c
+
+@enduml

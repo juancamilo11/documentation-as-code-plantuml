@@ -1,0 +1,38 @@
+@startuml
+/'
+Elaborado por: Juan Camilo Cardona Calderón
+Curso: Buenas prácticas para el desarrollo de software
+'/
+title "Use Case Diagram"
+
+skinparam actorStyle awesome
+
+left to right direction
+
+actor :Authenticated user: as authUser
+
+actor :Non-authenticated user: as noAuthUser
+
+package QuestionAndAnswerApp {
+    usecase "Add Answer Use Case" as UC1
+    usecase "Delete Answer Use Case" as UC2
+    usecase "Create Question Use Case" as UC3
+    usecase "Delete Question Use Case" as UC4
+    usecase "List Questions and Answers Use Case" as UC5
+    usecase "Owner List Use Case" as UC6
+    usecase "UpdateQuestionUseCase" as UC7
+    usecase "UpdateAnswerUseCase" as UC8
+}
+
+authUser --> UC1
+authUser --> UC2
+authUser --> UC3
+authUser --> UC4
+authUser --> UC5
+authUser --> UC6
+authUser --> UC7
+authUser --> UC8
+
+noAuthUser --> UC5
+
+@enduml
